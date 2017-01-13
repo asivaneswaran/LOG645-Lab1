@@ -18,6 +18,8 @@ int main(int argc, const char* argv[]) {
 		
 		int i,j,k;
 		
+		printf("Debut matrice 0");
+		fflush(stdout);
 		int matrix[8][8];
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
@@ -27,6 +29,8 @@ int main(int argc, const char* argv[]) {
 		}
 		
 		if(prob == 1){
+			printf("Debut du prob 1");
+			fflush(stdout);
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
 					for( j = 0; j < 8; j++){
@@ -37,6 +41,8 @@ int main(int argc, const char* argv[]) {
 			}
 		}
 		else if(prob==2){
+			printf("Debut du prob 2");
+			fflush(stdout);
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
 					for( j = 0; j < 8; j++){
