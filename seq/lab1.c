@@ -4,6 +4,7 @@
 
 int main(int argc, const char* argv[]) {
 	printf('Debut du programme lab1');
+	fflush(stdout);
 	if(argc == 3){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
 		double timeStart, timeEnd, Texec;
@@ -11,9 +12,9 @@ int main(int argc, const char* argv[]) {
 		gettimeofday (&tp, NULL); // Debut du chronometre
 		timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		
-		int prob = argv[0];
-		int valeur = argv[1];
-		int alteration = argv[2];
+		int prob = atoi(argv[0]);
+		int valeur = atoi(argv[1]);
+		int alteration = atoi(argv[2]);
 		
 		int i,j,k;
 		
