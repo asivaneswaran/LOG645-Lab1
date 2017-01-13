@@ -15,6 +15,8 @@ int main(int argc, const char* argv[]) {
 		int valeur = argv[1];
 		int alteration = argv[2];
 		
+		int i,j,k;
+		
 		int matrix[8][8];
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
@@ -59,7 +61,8 @@ int main(int argc, const char* argv[]) {
 				fprintf('%d',matrix[i][j]);
 			}
 		}
-		fprintf('%lf',Texec);
+		fprintf('%f',Texec);
+		return 0;
 	}
 	else{
 		return -1;
