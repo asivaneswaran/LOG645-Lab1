@@ -5,16 +5,16 @@
 int main(int argc, const char* argv[]) {
 	printf("%d", argc);
 	fflush(stdout);
-	if(argc >= 3){
+	if(argc == 4){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
 		double timeStart, timeEnd, Texec;
 		struct timeval tp;
 		gettimeofday (&tp, NULL); // Debut du chronometre
 		timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		
-		int prob = atoi(argv[0]);
-		int valeur = atoi(argv[1]);
-		int alteration = atoi(argv[2]);
+		int prob = atoi(argv[1]);
+		int valeur = atoi(argv[2]);
+		int alteration = atoi(argv[3]);
 		
 		int i,j,k;
 		
