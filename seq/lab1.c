@@ -3,7 +3,7 @@
 #include "sys/time.h"
 
 int main(int argc, const char* argv[]) {
-	printf("Debut du programme lab1");
+	printf("%d", argc);
 	fflush(stdout);
 	if(argc == 3){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
