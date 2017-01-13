@@ -58,10 +58,10 @@ int main(int argc, const char* argv[]) {
 		
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
-				fprintf('%d',matrix[i][j]);
+				printf('%d',matrix[i][j]);
 			}
 		}
-		fprintf('%f',Texec);
+		printf('%f',Texec);
 		return 0;
 	}
 	else{
