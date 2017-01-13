@@ -5,7 +5,7 @@
 int main(int argc, const char* argv[]) {
 	printf("%d", argc);
 	fflush(stdout);
-	if(argc == 3){
+	if(argc >= 3){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
 		double timeStart, timeEnd, Texec;
 		struct timeval tp;
@@ -18,8 +18,15 @@ int main(int argc, const char* argv[]) {
 		
 		int i,j,k;
 		
-		printf("Debut matrice 0");
+		printf("%d", prob);
 		fflush(stdout);
+
+		printf("%d", valeur);
+		fflush(stdout);
+
+		printf("%d", alteration);
+		fflush(stdout);
+
 		int matrix[8][8];
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
