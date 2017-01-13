@@ -3,7 +3,7 @@
 #include "sys/time.h"
 
 int main(int argc, const char* argv[]) {
-	printf('Debut du programme lab1');
+	printf("Debut du programme lab1");
 	fflush(stdout);
 	if(argc == 3){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
@@ -59,10 +59,11 @@ int main(int argc, const char* argv[]) {
 		
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
-				printf('%d',matrix[i][j]);
+				printf("%d ",matrix[i][j]);
 			}
 		}
-		printf('%f',Texec);
+		printf("\n");
+		printf("%f\n",Texec);
 		return 0;
 	}
 	else{
