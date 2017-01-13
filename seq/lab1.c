@@ -2,11 +2,11 @@
 #include <unistd.h>
 #include "sys/time.h"
 
-void main(int argc, const char* argv[]) {
+int main(int argc, const char* argv[]) {
 	//Code tire de l'exemple minuteur.c fourni sur le site du cours
 	double timeStart, timeEnd, Texec;
-	struc timeval tp;
-	gettimeofday (&tp,NULL); //debut du chronometre
+	struct timeval tp;
+	gettimeofday (&tp, NULL); // Debut du chronometre
 	timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 	
 	int prob = argv[0];
