@@ -11,9 +11,6 @@ lab1.o: lab1.c
 lab1 : lab1.o
 	$(CC) $(LFLAGS) lab1.o -o lab1
 
-run:
-	./lab1
-
 ps:
 	ps -fu $$USER
 
