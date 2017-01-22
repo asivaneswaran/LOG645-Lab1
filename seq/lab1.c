@@ -18,7 +18,7 @@ int main(int argc, const char* argv[]) {
 		int alteration = atoi(argv[3]);
 		
 		printf("================================================\n");
-		printf("SEQ: prob %d, init %d, iter %d\n",prob, valeur, alteration);
+		printf("SEQ: prob %d, init %d, iter %d\n\n",prob, valeur, alteration);
 		
 		int i,j,k;
 
@@ -66,7 +66,7 @@ int main(int argc, const char* argv[]) {
 			printf("%d %d %d %d %d %d %d %d\n",matrix[i][0],matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7]);
 		}
 		printf("\n\n");
-		printf("%f\n\n",Texec);
+		printf("%f\n",Texec);
 		printf("================================================\n");
 		return 0;
 	}
