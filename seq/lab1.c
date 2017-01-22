@@ -75,7 +75,7 @@ int main(int argc, const char* argv[]) {
 				printf("%d ",matrix[i][j]);
 			}*/
 			
-			printf("%d %d %d %d %d %d %d %d\n",matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7],matrix[i][8])
+			printf("%d %d %d %d %d %d %d %d\n",matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7],matrix[i][8]);
 		}
 		printf("\n\n");
 		printf("%f\n",Texec);
