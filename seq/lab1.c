@@ -17,7 +17,7 @@ int main(int argc, const char* argv[]) {
 		int valeur = atoi(argv[2]);
 		int alteration = atoi(argv[3]);
 		
-		printf("=========================================================");
+		printf("================================================\n");
 		printf("SEQ: prob %d, init %d, iter %d\n",prob, valeur, alteration);
 		
 		int i,j,k;
@@ -67,7 +67,7 @@ int main(int argc, const char* argv[]) {
 		}
 		printf("\n\n");
 		printf("%f\n\n",Texec);
-		printf("=========================================================");
+		printf("================================================\n");
 		return 0;
 	}
 	else{
