@@ -12,21 +12,14 @@ int main(int argc, const char* argv[]) {
 		gettimeofday (&tp, NULL); // Debut du chronometre
 		timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		
+		//acceder aux parametres 
 		int prob = atoi(argv[1]);
 		int valeur = atoi(argv[2]);
 		int alteration = atoi(argv[3]);
 		
 		int i,j,k;
-		
-		/*printf("%d", prob);
-		fflush(stdout);
 
-		printf("%d", valeur);
-		fflush(stdout);
-
-		printf("%d", alteration);
-		fflush(stdout);*/
-
+		// Initialisation de la matrice de depart
 		int matrix[8][8];
 		for( i = 0; i < 8; i++){
 			for( j = 0; j < 8; j++){
@@ -35,9 +28,7 @@ int main(int argc, const char* argv[]) {
 			}
 		}
 		
-		if(prob == 1){
-			printf("Debut du prob 1\n");
-			fflush(stdout);
+		if(prob == 1){			
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
 					for( j = 0; j < 8; j++){
@@ -48,8 +39,6 @@ int main(int argc, const char* argv[]) {
 			}
 		}
 		else if(prob==2){
-			printf("Debut du prob 2\n");
-			fflush(stdout);
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
 					for( j = 0; j < 8; j++){
@@ -71,11 +60,7 @@ int main(int argc, const char* argv[]) {
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes
 		
 		for( i = 0; i < 8; i++){
-			/*for( j = 0; j < 8; j++){
-				printf("%d ",matrix[i][j]);
-			}*/
-			
-			printf("%d %d %d %d %d %d %d %d\n",matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7],matrix[i][8]);
+			printf("%d %d %d %d %d %d %d %d\n",matrix[i][0],matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7]);
 		}
 		printf("\n\n");
 		printf("%f\n",Texec);
