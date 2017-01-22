@@ -17,6 +17,8 @@ int main(int argc, const char* argv[]) {
 		int valeur = atoi(argv[2]);
 		int alteration = atoi(argv[3]);
 		
+		printf("SEQ: prob %d, init %d, iter %d\n",prob, valeur, alteration);
+		
 		int i,j,k;
 
 		// Initialisation de la matrice de depart
