@@ -36,7 +36,7 @@ int main(int argc, const char* argv[]) {
 		}
 		
 		if(prob == 1){
-			printf("Debut du prob 1");
+			printf("Debut du prob 1\n");
 			fflush(stdout);
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
@@ -48,7 +48,7 @@ int main(int argc, const char* argv[]) {
 			}
 		}
 		else if(prob==2){
-			printf("Debut du prob 2");
+			printf("Debut du prob 2\n");
 			fflush(stdout);
 			for( k = 1; k <= alteration; k++){
 				for( i = 0; i < 8; i++){
