@@ -62,11 +62,12 @@ int main(int argc, const char* argv[]) {
 		timeEnd = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes
 		
+		printf("Matrice finale:\n");
 		for( i = 0; i < 8; i++){
 			printf("%d %d %d %d %d %d %d %d\n",matrix[i][0],matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7]);
 		}
 		printf("\n\n");
-		printf("%f\n",Texec);
+		printf("Temps d'execution : %f\n",Texec);
 		printf("================================================\n");
 		return 0;
 	}
