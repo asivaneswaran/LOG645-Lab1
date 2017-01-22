@@ -3,8 +3,8 @@
 #include "sys/time.h"
 
 int main(int argc, const char* argv[]) {
-	printf("%d", argc);
-	fflush(stdout);
+	//printf("%d", argc);
+	//fflush(stdout);
 	if(argc == 4){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
 		double timeStart, timeEnd, Texec;
@@ -18,14 +18,14 @@ int main(int argc, const char* argv[]) {
 		
 		int i,j,k;
 		
-		printf("%d", prob);
+		/*printf("%d", prob);
 		fflush(stdout);
 
 		printf("%d", valeur);
 		fflush(stdout);
 
 		printf("%d", alteration);
-		fflush(stdout);
+		fflush(stdout);*/
 
 		int matrix[8][8];
 		for( i = 0; i < 8; i++){
@@ -71,11 +71,13 @@ int main(int argc, const char* argv[]) {
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes
 		
 		for( i = 0; i < 8; i++){
-			for( j = 0; j < 8; j++){
+			/*for( j = 0; j < 8; j++){
 				printf("%d ",matrix[i][j]);
-			}
+			}*/
+			
+			printf("%d %d %d %d %d %d %d %d\n",matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7],matrix[i][8])
 		}
-		printf("\n");
+		printf("\n\n");
 		printf("%f\n",Texec);
 		return 0;
 	}
