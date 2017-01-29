@@ -131,7 +131,7 @@ int main(int argc, const char* argv[]) {
 	
 	int err;
 	int master = 0;
-	int nb_proc;
+	int np;
 	int mon_id;
 	
 	//acceder aux parametres 
@@ -146,7 +146,7 @@ int main(int argc, const char* argv[]) {
 		return -1;
 	}
 	err = MPI_Comm_rank(MPI_COMM_WORLD, &mon_id);
-	err = MPI_Comm_size(MPI_COMM_WORLD, &nb_proc);
+	err = MPI_Comm_size(MPI_COMM_WORLD, &np);
 	
 	if(mon_id == 0){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
@@ -170,7 +170,7 @@ int main(int argc, const char* argv[]) {
 			}
 		}	
 		if((prob==1) || (prob==2)){
-			probM(matrix, alteration, nb_proc);
+			probM(matrix, alteration, np);
 		}else{
 			printf("Choix de probleme invalide.\n");
 		}
