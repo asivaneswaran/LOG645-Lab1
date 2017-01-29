@@ -20,7 +20,7 @@ void traiterReponse(int resultat_finale[8][8], int resultat[4]){
 
 // Probleme 1 et 2 pour le process maitre 
 void probM(int matrix[8][8], int alteration, int nb_proc){
-	MPI_Status = statut;
+	MPI_Status statut;
 	int resultat_finale[8][8];
 	int i,j,k;
 	//Boucle pour envoyer au process
@@ -33,7 +33,7 @@ void probM(int matrix[8][8], int alteration, int nb_proc){
 		MPI_Send(&tampon,5,MPI_INT,k,0,MPI_COMM_WORLD);
 	}
 	//Boucle pour revevoir les reponses des process
-	for(k=1;k<nb_proc,k++){
+	for(k=1;k<nb_proc;k++){
 		int resultat[4];
 		MPI_Recv(&resultat,4,MPI_INT,MPI_ANY_SOURCE,1,MPI_COMM_WORLD,&statut);
 		traiterReponse(resultat_finale, resultat);
@@ -179,6 +179,10 @@ int main(int argc, const char* argv[]) {
 		gettimeofday (&tp, NULL); // Fin du chronometre
 		timeEnd = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes	
+		
+		printf("\n\n");
+		printf("Temps d'execution : %f\n",Texec);
+		printf("================================================\n");
 	} else{
 		switch(prob){
 			case 1: prob1S();
@@ -191,9 +195,6 @@ int main(int argc, const char* argv[]) {
 	// Fermeture du Comm_World
 	err = MPI_Finalize();
 	
-	printf("\n\n");
-	printf("Temps d'execution : %f\n",Texec);
-	printf("================================================\n");
 	return 0;
 
 }
