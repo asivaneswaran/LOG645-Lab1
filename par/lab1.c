@@ -3,24 +3,124 @@
 #include "sys/time.h"
 #include "mpi.h"
 
-// Probleme 1 pour le process maitre 
-void prob1Master(int matrix[8][8], int alteration, int nb_proc){
+//Fonction pour imprimer dans la console
+void print_result(int matrix[8][8]){
+	int i;
+	printf("Matrice finale:\n");
+	for( i = 0; i < 8; i++){
+		printf("%d %d %d %d %d %d %d %d\n",matrix[i][0],matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7]);
+	}
+}
+
+//Fonction pour traiter la reponse
+void traiterReponse(int resultat_finale[8][8], int resultat[4]){
+	resultat_finale[resultat[2]][resultat[3]] = resultat[0];
+	resultat_finale[resultat[2]][resultat[3]+1] = resultat[1];
+}
+
+// Probleme 1 et 2 pour le process maitre 
+void probM(int matrix[8][8], int alteration, int nb_proc){
+	MPI_Status = statut;
+	int resultat_finale[8][8];
+	int i,j,k;
+	//Boucle pour envoyer au process
+	for( k = 1; k<nb_proc;k++){
+		//Pour chaque process, on choisit les index a envoyer
+		i = (int)(k-1)/4;
+		j = ((k-1)%4)*2;
+		// Envoie a chaque process des donnees
+		int tampon[5] = {matrix[i][j], matrix[i][j+1], i, j, alteration};
+		MPI_Send(&tampon,5,MPI_INT,k,0,MPI_COMM_WORLD);
+	}
+	//Boucle pour revevoir les reponses des process
+	for(k=1;k<nb_proc,k++){
+		int resultat[4];
+		MPI_Recv(&resultat,4,MPI_INT,MPI_ANY_SOURCE,1,MPI_COMM_WORLD,&statut);
+		traiterReponse(resultat_finale, resultat);
+	}
 	
+	// Impression du resultat dans la console
+	print_result(resultat_finale);
+}
+
+//Set le buffer pour lenvoie au process maitre
+void setBufferEnvoieP1(int bufferE[4], int tmp[2], int bufferR[5]){
+	bufferE[0] = tmp[0];
+	bufferE[1] = tmp[1];
+	bufferE[2] = bufferR[2];
+	bufferE[3] = bufferR[3];
+}
+
+//Calcul pour la matrice de retour
+void calculP1(int tmp[2], int bufferR[5],int idx){
+	usleep(1000);
+	tmp[0] = bufferR[0] + (bufferR[2]+bufferR[3])*idx;
+	tmp[1] = bufferR[1] + (bufferR[2]+bufferR[3]+1)*idx;
 }
 
 // Probleme 1 pour les process esclaves
-void prob1Slave(){
+void prob1S(){
+	MPI_Status statut;
+	int buffer_envoie[4];
+	int buffer_recoit[5];
 	
+	//Recoit des donnees du maitre
+	MPI_Recv(&buffer_recoit,5,MPI_INT,0,0,MPI_COMM_WORLD,&statut);
+	
+	int idx;
+	int tmp[2];
+	for(idx=0; idx<5; idx++){
+		calculP1(tmp,buffer_recoit,idx);
+	}
+	
+	//Set le buffer de renvoie
+	setBufferEnvoieP1(buffer_envoie,tmp,buffer_recoit);
+	
+	//Envoie les donnees au maitre
+	MPI_Send(&buffer_envoie,4,MPI_INT,0,1,MPI_COMM_WORLD);
 }
 
-// Probleme 2 pour le process maitre 
-void prob2Master(int matrix[8][8], int alteration, int nb_proc){
-	
+//Set le buffer pour lenvoie au process maitre
+void setBufferEnvoieP2(int bufferE[4], int tmp[8], int bufferR[5]){
+	bufferE[0] = tmp[bufferR[3]];
+	bufferE[1] = tmp[bufferR[3]+1];
+	bufferE[2] = bufferR[2];
+	bufferE[3] = bufferR[3];
+}
+
+//Calcul pour la matrice de retour
+void calculP2(int tmp[8], int bufferR[5],int idx){
+	int j;
+	for(j=0;j<=bufferR[3]+1;j++){
+		usleep(1000);
+		if(j==0){
+			tmp[j] = bufferR[j] + (bufferR[2]*idx);
+		}else{
+			tmp[j] = bufferR[j] + bufferR[j-1]*idx;
+		}
+	}
 }
 
 // Probleme 2 pour les process esclaves
-void prob2Slave(){
+void prob2S(){
+	MPI_Status statut;
+	int buffer_envoie[4];
+	int buffer_recoit[5];
 	
+	//Recoit les donnees du process maitre
+	MPI_Recv(&buffer_recoit,5,MPI_INT,0,0,MPI_COMM_WORLD,&statut);
+	
+	int idx;
+	int tmp[8];
+	
+	for(idx=0;idx<=buffer_recoit[4];idx++){
+		calculP2(tmp,buffer_recoit,idx);
+	}
+	
+	//Set le buffer de renvoie
+	setBufferEnvoieP2(buffer_envoie,tmp,buffer_recoit);
+	//Envoie des donnees au maitre
+	MPI_Send(&buffer_envoie,4,MPI_INT,0,1,MPI_COMM_WORLD);
 }
 
 int main(int argc, const char* argv[]) {
@@ -69,17 +169,10 @@ int main(int argc, const char* argv[]) {
 				matrix[i][j] = valeur;
 			}
 		}	
-		
-		switch(prob){
-			case 1:
-					prob1Master(matrix, alteration, nb_proc);
-					break;
-			case 2:
-					prob2Master(matrix, alteration, nb_proc);
-					break;
-			default:
-					printf("Choix de probleme inexistant!\n");
-					break;
+		if((prob==1) || (prob==2)){
+			probM(matrix, alteration, nb_proc);
+		}else{
+			printf("Choix de probleme invalide.\n");
 		}
 		
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
@@ -88,9 +181,9 @@ int main(int argc, const char* argv[]) {
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes	
 	} else{
 		switch(prob){
-			case 1: prob1Slave();
+			case 1: prob1S();
 					break;
-			case 2: prob2Slave();
+			case 2: prob2S();
 					break;
 		}
 	}
@@ -98,10 +191,6 @@ int main(int argc, const char* argv[]) {
 	// Fermeture du Comm_World
 	err = MPI_Finalize();
 	
-	printf("Matrice finale:\n");
-	for( i = 0; i < 8; i++){
-		printf("%d %d %d %d %d %d %d %d\n",matrix[i][0],matrix[i][1],matrix[i][2],matrix[i][3],matrix[i][4],matrix[i][5],matrix[i][6],matrix[i][7]);
-	}
 	printf("\n\n");
 	printf("Temps d'execution : %f\n",Texec);
 	printf("================================================\n");
