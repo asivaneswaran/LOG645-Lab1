@@ -54,7 +54,7 @@ int main(int argc, const char* argv[]) {
 		
 		//Dans le cas du probleme 1
 		if(prob==1){
-			for(k=0;k<alteration;k++){
+			for(k=0;k<=alteration;k++){
 				for(i=0;i<8;i++){
 					usleep(1000);
 					matrix[i]= matrix[i] + (i+mon_id) * k;
@@ -62,7 +62,7 @@ int main(int argc, const char* argv[]) {
 			}
 		//Dans le cas du probleme 2
 		}else if(prob ==2){
-			for(k=0;k<alteration;k++){
+			for(k=0;k<=alteration;k++){
 				for(i=0;i<8;i++){
 					if(i==0){
 						usleep(1000);
