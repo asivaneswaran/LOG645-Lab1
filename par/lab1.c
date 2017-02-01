@@ -42,7 +42,7 @@ int main(int argc, const char* argv[]) {
 		
 		//Initialisation des lignes de la matrice (chaque ligne est identique au debut)
 		int i,k;
-		int matrix_temp[8];
+		int matrix[8];
 		for(i = 0; i < 8;i++) {
 			matrix[i] = valeur;
 		}
@@ -88,6 +88,7 @@ int main(int argc, const char* argv[]) {
 		
 		//Affichage de la matrice finale
 		printf("Matrice finale:\n");
+		int i;
 		for( i = 0; i < 8; i++){
 			printf("%d %d %d %d %d %d %d %d\n",resultat[i][0],resultat[i][1],resultat[i][2],resultat[i][3],resultat[i][4],resultat[i][5],resultat[i][6],resultat[i][7]);
 		}
