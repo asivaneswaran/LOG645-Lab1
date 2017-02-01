@@ -7,7 +7,6 @@
 int main(int argc, const char* argv[]) {
 	if (argc != 4){
 		printf("Il manque des arguments! \n");
-		fflush(stdout);
 		return 0;
 	}
 	
@@ -31,7 +30,6 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Init(&argc, &argv);
 	if(err != MPI_SUCCESS){
 		printf("Probleme lors de l'initialisation de MPI. \n");
-		fflush(stdout);
 		return -1;
 	}
 	MPI_Status statut;
@@ -51,6 +49,7 @@ int main(int argc, const char* argv[]) {
 		
 		//Dans le cas du probleme 1
 		if(prob==1){
+			//Meme code que sequentielle sauf change j par mon_id
 			for(k=0;k<=alteration;k++){
 				for(i=0;i<8;i++){
 					usleep(1000);
@@ -59,6 +58,7 @@ int main(int argc, const char* argv[]) {
 			}
 		//Dans le cas du probleme 2
 		}else if(prob ==2){
+			//Meme code que sequentielle sauf change j par mon_id
 			for(k=0;k<=alteration;k++){
 				for(i=0;i<8;i++){
 					if(i==0){
@@ -87,6 +87,7 @@ int main(int argc, const char* argv[]) {
 		
 		int j;
 		int resultat[8][8];
+		//Reception des messages dans lordre pour avoir le bon resultat
 		for(j=0;j<8;j++){
 			MPI_Recv(resultat[j],8,MPI_INT,j,0,MPI_COMM_WORLD,&statut);
 		}
@@ -99,6 +100,7 @@ int main(int argc, const char* argv[]) {
 		}
 	}
 	
+	//Fermeture du Comm_World
 	MPI_Finalize();
 	
 	if(mon_id== master){
