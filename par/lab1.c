@@ -148,6 +148,8 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Comm_rank(MPI_COMM_WORLD, &mon_id);
 	err = MPI_Comm_size(MPI_COMM_WORLD, &np);
 	
+	printf("Il y a %d process! \n",np);
+	
 	if(mon_id == 0){
 		//Code tire de l'exemple minuteur.c fourni sur le site du cours
 		double timeStart, timeEnd, Texec;
