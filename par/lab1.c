@@ -7,6 +7,7 @@
 int main(int argc, const char* argv[]) {
 	if (argc != 4){
 		printf("Il manque des arguments! \n");
+		fflush(stdout);
 		return 0;
 	}
 	
@@ -30,6 +31,7 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Init(&argc, &argv);
 	if(err != MPI_SUCCESS){
 		printf("Probleme lors de l'initialisation de MPI. \n");
+		fflush(stdout);
 		return -1;
 	}
 	MPI_Status statut;
@@ -39,6 +41,8 @@ int main(int argc, const char* argv[]) {
 	
 	// Les 8 premiers process gerent les calculs
 	if(mon_id < 8){
+		printf("Process %d commence job.\n",mon_id);
+		fflush(stdout);
 		
 		//Initialisation des lignes de la matrice (chaque ligne est identique au debut)
 		int i,k;
@@ -75,11 +79,18 @@ int main(int argc, const char* argv[]) {
 			printf("Numero de probleme inexistant!!! \n");
 			return -1;
 		}
+		
+		printf("Process %d fini job.\n",mon_id);
+		fflush(stdout);
+		
 		//envoie les donnees au process maitre
 		MPI_Send(&matrix, 8, MPI_INT, mon_id, 0, MPI_COMM_WORLD);
 	}
 	// process maitre qui gerent la reponse
 	if(mon_id == master){
+		printf("Process %d commence job.\n",mon_id);
+		fflush(stdout);
+		
 		int j;
 		int resultat[8][8];
 		for(j=0;j<8;j++){
@@ -91,6 +102,7 @@ int main(int argc, const char* argv[]) {
 		int i;
 		for( i = 0; i < 8; i++){
 			printf("%d %d %d %d %d %d %d %d\n",resultat[i][0],resultat[i][1],resultat[i][2],resultat[i][3],resultat[i][4],resultat[i][5],resultat[i][6],resultat[i][7]);
+			fflush(stdout);
 		}
 	}
 	
@@ -105,6 +117,7 @@ int main(int argc, const char* argv[]) {
 		printf("\n\n");
 		printf("Temps d'execution : %f\n",Texec);
 		printf("================================================\n");
+		fflush(stdout);
 	}
 	
 	return 0;
