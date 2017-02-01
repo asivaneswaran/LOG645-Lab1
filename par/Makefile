@@ -12,7 +12,7 @@ lab1 : lab1.o
 	$(CC) $(LFLAGS) lab1.o -o lab1
 	
 run:
-	mpirun --hostfile hostfile -np 64 lab1
+	mpirun --hostfile hostfile -np 8 lab1
 	
 ps:
 	ps -fu $$USER
