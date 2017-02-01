@@ -96,7 +96,7 @@ int main(int argc, const char* argv[]) {
 		for(j=0;j<8;j++){
 			printf("Process %d recoit %d result.\n",mon_id,j);
 			fflush(stdout);
-			MPI_Recv(resultat[j],8,MPI_INT,8,0,MPI_COMM_WORLD,&statut);
+			MPI_Recv(resultat[j],8,MPI_INT,j,0,MPI_COMM_WORLD,&statut);
 		}
 		
 		//Affichage de la matrice finale
