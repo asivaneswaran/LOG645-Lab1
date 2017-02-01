@@ -10,12 +10,6 @@ int main(int argc, const char* argv[]) {
 		return 0;
 	}
 	
-	//Code tire de l'exemple minuteur.c fourni sur le site du cours
-	double timeStart, timeEnd, Texec;
-	struct timeval tp;
-	gettimeofday (&tp, NULL); // Debut du chronometre
-	timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
-	
 	int err;
 	int np;
 	int mon_id;
@@ -36,6 +30,12 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Comm_rank(MPI_COMM_WORLD, &mon_id);
 	err = MPI_Comm_size(MPI_COMM_WORLD, &np);
 	
+	//Code tire de l'exemple minuteur.c fourni sur le site du cours
+	double timeStart, timeEnd, Texec;
+	struct timeval tp;
+	gettimeofday (&tp, NULL); // Debut du chronometre
+	timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
+	
 	// process maitre qui gerent la reponse
 	if(mon_id == master){
 		printf("================================================\n");
@@ -54,6 +54,15 @@ int main(int argc, const char* argv[]) {
 		for( i = 0; i < 8; i++){
 			printf("%d %d %d %d %d %d %d %d\n",resultat[i][0],resultat[i][1],resultat[i][2],resultat[i][3],resultat[i][4],resultat[i][5],resultat[i][6],resultat[i][7]);
 		}
+		
+		//Code tire de l'exemple minuteur.c fourni sur le site du cours
+		gettimeofday (&tp, NULL); // Fin du chronometre
+		timeEnd = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
+		Texec = timeEnd - timeStart; //Temps d'execution en secondes	
+		
+		printf("\n");
+		printf("Temps d'execution : %f\n",Texec);
+		printf("================================================\n");
 	}
 	// Les 8 autres process gerent les calculs
 	else if(mon_id != master){
@@ -103,18 +112,6 @@ int main(int argc, const char* argv[]) {
 	
 	//Fermeture du Comm_World
 	MPI_Finalize();
-	
-	if(mon_id == master){
-		//Code tire de l'exemple minuteur.c fourni sur le site du cours
-		gettimeofday (&tp, NULL); // Fin du chronometre
-		timeEnd = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
-		Texec = timeEnd - timeStart; //Temps d'execution en secondes	
-		
-		printf("\n");
-		printf("Temps d'execution : %f\n",Texec);
-		printf("================================================\n");
-		
-	}
 	
 	return 0;
 }
