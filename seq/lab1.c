@@ -13,9 +13,9 @@ int main(int argc, const char* argv[]) {
 		timeStart = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		
 		//acceder aux parametres 
-		int prob = atoi(argv[1]);
-		int valeur = atoi(argv[2]);
-		int alteration = atoi(argv[3]);
+		int prob = (int)atoi(argv[1]);
+		int valeur = (int)atoi(argv[2]);
+		int alteration = (int)atoi(argv[3]);
 		
 		printf("================================================\n");
 		printf("SEQ: prob %d, init %d, iter %d\n\n",prob, valeur, alteration);
