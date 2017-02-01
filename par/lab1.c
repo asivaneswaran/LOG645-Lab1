@@ -38,11 +38,11 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Comm_rank(MPI_COMM_WORLD, &mon_id);
 	err = MPI_Comm_size(MPI_COMM_WORLD, &np);
 	
+	printf("================================================\n");
+	printf("PAR: prob %d, init %d, iter %d\n\n", prob, valeur, alteration);
 	
 	// Les 8 premiers process gerent les calculs
 	if(mon_id < 8){
-		printf("Process %d commence job.\n",mon_id);
-		fflush(stdout);
 		
 		//Initialisation des lignes de la matrice (chaque ligne est identique au debut)
 		int i,k;
@@ -80,22 +80,15 @@ int main(int argc, const char* argv[]) {
 			return -1;
 		}
 		
-		printf("Process %d fini job.\n",mon_id);
-		fflush(stdout);
-		
 		//envoie les donnees au process maitre
 		MPI_Send(&matrix, 8, MPI_INT, 8, 0, MPI_COMM_WORLD);
 	}
 	// process maitre qui gerent la reponse
 	if(mon_id == master){
-		printf("Process %d commence job.\n",mon_id);
-		fflush(stdout);
 		
 		int j;
 		int resultat[8][8];
 		for(j=0;j<8;j++){
-			printf("Process %d recoit %d result.\n",mon_id,j);
-			fflush(stdout);
 			MPI_Recv(resultat[j],8,MPI_INT,j,0,MPI_COMM_WORLD,&statut);
 		}
 		
@@ -104,7 +97,6 @@ int main(int argc, const char* argv[]) {
 		int i;
 		for( i = 0; i < 8; i++){
 			printf("%d %d %d %d %d %d %d %d\n",resultat[i][0],resultat[i][1],resultat[i][2],resultat[i][3],resultat[i][4],resultat[i][5],resultat[i][6],resultat[i][7]);
-			fflush(stdout);
 		}
 	}
 	
@@ -116,10 +108,10 @@ int main(int argc, const char* argv[]) {
 		timeEnd = (double) (tp.tv_sec) + (double) (tp.tv_usec) / 1e6;
 		Texec = timeEnd - timeStart; //Temps d'execution en secondes	
 		
-		printf("\n\n");
+		printf("\n");
 		printf("Temps d'execution : %f\n",Texec);
 		printf("================================================\n");
-		fflush(stdout);
+		
 	}
 	
 	return 0;
