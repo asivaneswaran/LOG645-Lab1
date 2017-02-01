@@ -130,13 +130,12 @@ int main(int argc, const char* argv[]) {
 	}
 	
 	int err;
-	int master = 0;
 	int np;
 	int mon_id;
 	
 	//acceder aux parametres 
-	int prob = atoi(argv[1]);
-	int valeur = atoi(argv[2]);
+	int prob = (int)atoi(argv[1]);
+	int valeur = (int)atoi(argv[2]);
 	int alteration = atoi(argv[3]);
 		
 	// Creation d'un Comm_World
@@ -159,7 +158,7 @@ int main(int argc, const char* argv[]) {
 		printf("================================================\n");
 		printf("PAR: prob %d, init %d, iter %d\n\n", prob, valeur, alteration);
 		
-		int i,j,k;
+		int i,j;
 
 		// Initialisation de la matrice de depart
 		int matrix[8][8];
