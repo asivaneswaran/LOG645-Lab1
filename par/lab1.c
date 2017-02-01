@@ -38,9 +38,6 @@ int main(int argc, const char* argv[]) {
 	err = MPI_Comm_rank(MPI_COMM_WORLD, &mon_id);
 	err = MPI_Comm_size(MPI_COMM_WORLD, &np);
 	
-	printf("================================================\n");
-	printf("PAR: prob %d, init %d, iter %d\n\n", prob, valeur, alteration);
-	
 	// Les 8 premiers process gerent les calculs
 	if(mon_id < 8){
 		
@@ -85,6 +82,8 @@ int main(int argc, const char* argv[]) {
 	}
 	// process maitre qui gerent la reponse
 	if(mon_id == master){
+		printf("================================================\n");
+		printf("PAR: prob %d, init %d, iter %d\n\n", prob, valeur, alteration);
 		
 		int j;
 		int resultat[8][8];
