@@ -76,7 +76,7 @@ int main(int argc, const char* argv[]) {
 			return -1;
 		}
 		//envoie les donnees au process maitre
-		MPI_Send(&matrix, 8, MPI_INT, 8, 0, MPI_COMM_WORLD);
+		MPI_Send(&matrix, 8, MPI_INT, mon_id, 0, MPI_COMM_WORLD);
 	}
 	// process maitre qui gerent la reponse
 	if(mon_id == master){
